@@ -1,0 +1,111 @@
+version: '3.1'
+
+services:
+  minio1:
+    image: minio/minio
+    volumes:
+      - minio1-data:/export
+    networks:
+      - minio_distributed
+    deploy:
+      restart_policy:
+        delay: 10s
+        max_attempts: 10
+        window: 60s
+      labels:
+        traefik.frontend.rule: "Host:minioproxy"
+        traefik.port: "9000"
+    command: server http://minio1/export http://minio2/export http://minio3/export http://minio4/export
+    secrets:
+      - secret_key
+      - access_key
+
+  minio2:
+    image: minio/minio
+    volumes:
+      - minio2-data:/export
+    networks:
+      - minio_distributed
+    deploy:
+      restart_policy:
+        delay: 10s
+        max_attempts: 10
+        window: 60s
+      labels:
+        traefik.frontend.rule: "Host:minioproxy"
+        traefik.port: "9000"
+    command: server http://minio1/export http://minio2/export http://minio3/export http://minio4/export
+    secrets:
+      - secret_key
+      - access_key
+
+  minio3:
+    image: minio/minio
+    volumes:
+      - minio3-data:/export
+    networks:
+      - minio_distributed
+    deploy:
+      restart_policy:
+        delay: 10s
+        max_attempts: 10
+        window: 60s
+      labels:
+        traefik.frontend.rule: "Host:minioproxy"
+        traefik.port: "9000"
+    command: server http://minio1/export http://minio2/export http://minio3/export http://minio4/export
+    secrets:
+      - secret_key
+      - access_key
+
+  minio4:
+    image: minio/minio
+    volumes:
+      - minio4-data:/export
+    networks:
+      - minio_distributed
+    deploy:
+      restart_policy:
+        delay: 10s
+        max_attempts: 10
+        window: 60s
+      labels:
+        traefik.frontend.rule: "Host:minioproxy"
+        traefik.port: "9000"
+    command: server http://minio1/export http://minio2/export http://minio3/export http://minio4/export
+    secrets:
+      - secret_key
+      - access_key
+
+  minioproxy:
+    image: traefik
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      -  minio_distributed
+    ports:
+      - 80:80
+      - 8081:8080
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    command: --docker --docker.swarmmode --docker.domain=minio --docker.watch --web
+
+volumes:
+  minio1-data:
+
+  minio2-data:
+
+  minio3-data:
+
+  minio4-data:
+
+networks:
+  minio_distributed:
+    driver: overlay
+
+secrets:
+  secret_key:
+    external: true
+  access_key:
+    external: true

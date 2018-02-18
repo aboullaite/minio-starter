@@ -1,0 +1,9 @@
+{
+  "groups": [
+    {
+      "name": "minio",
+      "type": "me.aboullaite.minio.MinioProperties",
+      "sourceType": "me.aboullaite.minio.MinioProperties"
+    }
+  ]
+}
