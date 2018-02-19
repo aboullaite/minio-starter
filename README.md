@@ -19,5 +19,17 @@ docker stack deploy --compose-file=minio-swarm.yml  minio_stack
 We configured Træfɪk with Host:minioproxy. So we need to have a dns record for `minioproxy` pointing to a ip address of any Docker swarm node or just add it to `/etc/hosts` for a quick test. 
 
 #### Configuration
+You need to add `minio-springboot-starter` dependency to your pom. Till now, you need to build the starter and it to your repo. 
 You can either use the rest API to interact with minio, by setting `minio.endpoint.enable = true` (default value is false), or using the `MinioTemplate` class service directly on your code. you need also to setup minion credentials.
-Check the sample for a usage example
+
+Below a configuration example
+
+```
+minio:
+  url: http://minioproxy
+  access-key: changeme
+  secret-key: changeme
+  endpoint:
+    enable: true
+    name: miniotest
+```
