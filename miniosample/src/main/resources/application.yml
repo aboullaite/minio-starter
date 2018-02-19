@@ -1,7 +1,7 @@
 minio:
   url: http://minioproxy
-  access-key: 12345678
-  secret-key: 123456789
+  access-key: changeme
+  secret-key: changeme
   endpoint:
     enable: true
     name: miniotest

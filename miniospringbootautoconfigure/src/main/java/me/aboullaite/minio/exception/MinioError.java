@@ -1,4 +1,4 @@
-package me.aboullaite.minio;
+package me.aboullaite.minio.exception;
 
 import org.springframework.http.HttpStatus;
 

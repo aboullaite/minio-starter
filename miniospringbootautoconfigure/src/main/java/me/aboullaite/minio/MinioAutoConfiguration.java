@@ -1,5 +1,6 @@
 package me.aboullaite.minio;
 
+import me.aboullaite.minio.service.MinioTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.*;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

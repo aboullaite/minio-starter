@@ -1,4 +1,4 @@
-package me.aboullaite.minio;
+package me.aboullaite.minio.exception;
 
 import io.minio.errors.*;
 import org.springframework.http.HttpHeaders;

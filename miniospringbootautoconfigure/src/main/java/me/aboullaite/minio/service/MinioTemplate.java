@@ -1,4 +1,4 @@
-package me.aboullaite.minio;
+package me.aboullaite.minio.service;
 
 import io.minio.MinioClient;
 import io.minio.ObjectStat;

@@ -1,10 +1,8 @@
-package me.aboullaite.minio;
+package me.aboullaite.minio.http;
 
-import io.minio.ObjectStat;
-import io.minio.Result;
 import io.minio.errors.*;
 import io.minio.messages.Bucket;
-import io.minio.messages.Item;
+import me.aboullaite.minio.service.MinioTemplate;
 import me.aboullaite.minio.vo.MinioItem;
 import me.aboullaite.minio.vo.MinioObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +18,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 @ConditionalOnProperty(name = "minio.endpoint.enable", havingValue = "true")
 @RestController
